@@ -37,7 +37,7 @@ class CheeseCake extends Cookie {
 }
 
 class Oven {
-  bakes(cookie, bakesTime) {
+  static bakes(cookie, bakesTime) {
     console.log(`Start Baking ${cookie.name}!`);
     for (let i = 0; i <= bakesTime; i+=5) {
       if (i === cookie.cooked_time) {
@@ -61,8 +61,7 @@ class Oven {
 let chocoChip = new ChocolateChip();
 let peanutButter = new PeanutButter();
 let cheeseCake = new CheeseCake();
-let oven = new Oven();
 
-oven.bakes(chocoChip, 20);
-oven.bakes(peanutButter, 25);
-oven.bakes(cheeseCake, 40);
+Oven.bakes(chocoChip, 20);
+Oven.bakes(peanutButter, 25);
+Oven.bakes(cheeseCake, 40);
