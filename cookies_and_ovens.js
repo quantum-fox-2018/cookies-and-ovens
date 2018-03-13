@@ -35,7 +35,10 @@ class Oven {
     this.cakes = cakes
   }
 
-  baking(bakeTime){
+  baking(timer){
+
+  for (var bakeTime = 0; bakeTime < timer; bakeTime+= 5) {
+    console.log("Bake Time", bakeTime)
     for (var i = 0; i < cakes.length; i++) {
       if(cakes[i].bakeTime === bakeTime+5){
         cakes[i].status = "hampir matang"
@@ -44,23 +47,19 @@ class Oven {
       }else if(cakes[i].bakeTime < bakeTime){
         cakes[i].status = "hangus"
       }
+      console.log(cakes[i].cakeType, cakes[i].status)
     }
   }
-
+}
 }
 
-var CakeCokelat = new Cake("Cake Cokelat", 20)
-var CakeKacang = new Cake("Cake kacang", 30)
-var CakeKeju = new Cake("Cake keju", 35)
+var CakeCokelat = new Cake("Kue Cokelat", 20)
+var CakeKacang = new Cake("Kue kacang", 30)
+var CakeKeju = new Cake("Kue keju", 35)
 var cakes = []
 cakes.push(CakeCokelat)
 cakes.push(CakeKacang)
 cakes.push(CakeKeju)
 
 var oven = new Oven(cakes);
-
-for (var i =5; i<45; i+=5) {
-  oven.baking(i)
-  console.log("waktu panggang", i);
-  console.log(oven.cakes);
-}
+oven.baking(45)
