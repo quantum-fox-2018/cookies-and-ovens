@@ -35,7 +35,7 @@ class Oven {
     this.cakes = cakes
   }
 
-  memanggang(bakeTime){
+  baking(bakeTime){
     for (var i = 0; i < cakes.length; i++) {
       if(cakes[i].bakeTime === bakeTime+5){
         cakes[i].status = "hampir matang"
@@ -60,7 +60,7 @@ cakes.push(CakeKeju)
 var oven = new Oven(cakes);
 
 for (var i =5; i<45; i+=5) {
-  oven.memanggang(i)
+  oven.baking(i)
   console.log("waktu panggang", i);
   console.log(oven.cakes);
 }
