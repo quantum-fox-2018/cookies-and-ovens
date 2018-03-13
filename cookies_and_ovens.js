@@ -9,7 +9,7 @@
 //
 // Your code here
 
-class MasakKue {
+class Oven{
     constructor(bakeTime) {
       this.bakeTime = bakeTime
       this.cookTime = 0
@@ -35,7 +35,7 @@ class MasakKue {
     }
 }
 
-class Coklat extends MasakKue{
+class Coklat extends Oven{
   constructor(bakeTime) {
     super(bakeTime)
     this.matangTime = 20
@@ -43,14 +43,14 @@ class Coklat extends MasakKue{
   }
 }
 
-class Kacang extends MasakKue{
+class Kacang extends Oven{
   constructor(bakeTime) {
     super(bakeTime)
     this.matangTime = 30
     this.kueName = 'kue kacang'
   }
 }
-class Keju extends MasakKue{
+class Keju extends Oven{
   constructor(bakeTime) {
     super(bakeTime)
     this.matangTime = 35
