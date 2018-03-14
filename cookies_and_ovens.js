@@ -1,91 +1,105 @@
-// Answer These Questions:
-//
-// - What are essential classes?
-// - What attributes will each class have?
-// - What interface will each class provide?
-// - How will the classes interact with each other?
-// - Which classes will inherit from others, if any?
-//
-//
-// Your code here
+class Oven {
+  constructor(name, time) {
 
-class bake {
+    this.name = name
+    this.timer = time
+    this.start_time = 0
+    this.done = name.done
+    this.kondisi = ''
+    this.timeSet = time
 
-     constructor(name, time){
+  }
 
-         this.name = name
-         this.time = 0
-         this.done = time
-         this.status = this.status()
+  addTime(){
 
-     }
+    this.start_time += 5
 
-     addTime(){
+  }
 
-         this.time += 5
+  status(){
 
-     }
+    this.addTime()
 
-     status (){
+    if (this.start_time == this.done-5 ){
 
-       for (;this.time <= this.done;){
+      this.kondisi = 'hampir matang'
 
-         if (this.time == this.done-5 ){
+    } else if (this.start_time < this.done){
 
-             console.log(this.name+', menit ke-'+this.time+' : hampir matang')
+      this.kondisi = 'mentah'
 
-         } else if (this.time < this.done){
+    } else if (this.start_time == this.done){
 
-             console.log(this.name+', menit ke-'+this.time+' : mentah')
+      this.kondisi = 'matang'
 
-         } else if (this.time == this.done){
+    } else if(this.start_time > this.done){
 
-             console.log(this.name+', menit ke-'+this.time+' : matang')
+      this.kondisi = 'hangus'
 
-         } else if(this.time > this.done){
+    }
 
-             console.log(this.name+', menit ke-'+this.time+' : hangus')
 
-         }
+  }
 
-         this.addTime()
+}
 
-       }
 
-     }
+class Coklat extends Oven{
 
- }
+  constructor(name, time) {
 
- class Kacang extends bake {
+    super(name, time)
+    this.done = time
 
-     constructor(){
+  }
 
-        super('Kue Kacang',20)
+}
 
-     }
+class Kacang extends Oven{
 
- }
+  constructor(name, time) {
 
- class Coklat extends bake {
+    super(name, time)
+    this.done = time
 
-     constructor(){
+  }
 
-        super('Kue Coklat',30)
+}
 
-     }
+class Keju extends Oven{
 
- }
+  constructor(name, time) {
 
- class Keju extends bake {
+    super(name, time)
+    this.done = time
 
-     constructor(){
+  }
 
-        super('Kue Keju',35)
+}
 
-     }
+let coklat = new Coklat('coklat', 20)
+let kacang = new Kacang('Kacang', 30)
+let keju = new Keju('Keju', 35)
 
- }
+let ovensCoklat = new Oven(coklat, 30)
+let ovensKacang = new Oven(kacang, 35)
+let ovensKeju = new Oven(keju, 45)
 
- let kacang = new Kacang()
- let coklat = new Coklat()
- let keju = new Keju()
+for (; ovensCoklat.start_time < ovensCoklat.timeSet;) {
+  ovensCoklat.status()
+  console.log(`Kue ${coklat.name}, menit ke ${ovensCoklat.start_time} : ${ovensCoklat.kondisi}`);
+}
+
+console.log();
+
+for (; ovensKacang.start_time < ovensKacang.timeSet;) {
+  ovensKacang.status()
+  console.log(`Kue ${kacang.name}, menit ke ${ovensKacang.start_time} : ${ovensKacang.kondisi}`);
+}
+
+console.log();
+
+for (; ovensKeju.start_time < ovensKeju.timeSet;) {
+  ovensKeju.status()
+  console.log(`Kue ${keju.name}, menit ke ${ovensKeju.start_time} : ${ovensKeju.kondisi}`);
+}
