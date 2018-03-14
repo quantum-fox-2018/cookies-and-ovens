@@ -10,48 +10,52 @@
 // Your code here
 
 class Oven{
-    constructor(bakeTime) {
-      this.bakeTime = bakeTime
-      this.cookTime = 0
-      this.matangTime = 20
-      this.statusMatang = 'mentah'
-      this.kueName = ''
+    constructor() {
+
     }
-    bake() {
-      if (this.cookTime < this.bakeTime) {
-        this.cookTime +=5
+    bake(cookieParam) {
+      if (cookieParam.cookTime < cookieParam.bakeTime) {
+        cookieParam.cookTime +=5
       }
     }
-    statKue() {
-        if(this.cookTime < this.matangTime/2){
-            this.statusMatang = 'mentah'
-        }else if(this.cookTime === this.matangTime){
-            this.statusMatang = 'matang'
-        }else if(this.cookTime > this.matangTime/2 && this.cookTime < this.matangTime){
-            this.statusMatang = 'hampir matang'
-        }else if(this.cookTime > this.matangTime){
-            this.statusMatang = 'hangus'
+    statKue(cookieParam) {
+        if(cookieParam.cookTime < cookieParam.matangTime/2){
+            cookieParam.statusMatang = 'mentah'
+        }else if(cookieParam.cookTime === cookieParam.matangTime){
+            cookieParam.statusMatang = 'matang'
+        }else if(cookieParam.cookTime > cookieParam.matangTime/2 && cookieParam.cookTime < cookieParam.matangTime){
+            cookieParam.statusMatang = 'hampir matang'
+        }else if(cookieParam.cookTime > cookieParam.matangTime){
+            cookieParam.statusMatang = 'hangus'
         }
     }
 }
-
-class Coklat extends Oven{
+class Cookie{
   constructor(bakeTime) {
-    super(bakeTime)
+    this.bakeTime = bakeTime
+    this.cookTime = 0
     this.matangTime = 20
-    this.kueName = 'kue coklat'
+    this.statusMatang = 'mentah'
+    this.kueName = ''
+  }
+}
+class Coklat extends Cookie{
+  constructor(bakeTime) {
+     super(bakeTime)
+     this.matangTime = 20
+     this.kueName = 'kue coklat'
   }
 }
 
-class Kacang extends Oven{
+class Kacang extends Cookie{
   constructor(bakeTime) {
     super(bakeTime)
     this.matangTime = 30
     this.kueName = 'kue kacang'
   }
 }
-class Keju extends Oven{
-  constructor(bakeTime) {
+class Keju extends Cookie{
+    constructor(bakeTime) {
     super(bakeTime)
     this.matangTime = 35
     this.kueName = 'kue keju'
@@ -60,22 +64,23 @@ class Keju extends Oven{
 
 
 let coklat = new Coklat(25)
+let oven = new Oven()
 do {
-  coklat.bake();
-  coklat.statKue();
+  oven.bake(coklat);
+  oven.statKue(coklat);
   console.log(`kue ${coklat.kueName} menit ke = ${coklat.cookTime} : ${coklat.statusMatang}`)
 } while (coklat.cookTime < coklat.bakeTime )
 console.log('__________________________________________________________')
 let kacang = new Kacang(30)
 do {
-  kacang.bake();
-  kacang.statKue();
+oven.bake(kacang);
+oven.statKue(kacang);
   console.log(`kue ${kacang.kueName} menit ke = ${kacang.cookTime} : ${kacang.statusMatang}`)
 } while (kacang.cookTime < kacang.bakeTime )
 console.log('__________________________________________________________')
 let keju = new Keju(25)
 do {
-  keju.bake();
-  keju.statKue();
+oven.bake(keju);
+oven.statKue(keju);
   console.log(`kue ${keju.kueName} menit ke = ${keju.cookTime} : ${keju.statusMatang}`)
 } while (keju.cookTime < keju.bakeTime )
