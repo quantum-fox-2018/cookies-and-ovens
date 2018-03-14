@@ -37,21 +37,26 @@ class CheeseCake extends Cookie {
 }
 
 class Oven {
-  static bakes(cookie, bakesTime) {
-    console.log(`Start Baking ${cookie.name}!`);
-    for (let i = 0; i <= bakesTime; i+=5) {
-      if (i === cookie.cooked_time) {
-        cookie.status = 'matang';
-        console.log(`${cookie.name}, menit ke ${i} : ${cookie.status}`);
-      } else if (i > cookie.cooked_time) {
-        cookie.status = 'hangus'
-        console.log(`${cookie.name}, menit ke ${i} : ${cookie.status}`);
+  constructor(cookie, bakesTime) {
+    this.cookie = cookie;
+    this.bakes_time = bakesTime;
+  }
+
+  bakes() {
+    console.log(`Start Baking ${this.cookie.name}!`);
+    for (let i = 0; i <= this.bakes_time; i+=5) {
+      if (i === this.cookie.cooked_time) {
+        this.cookie.status = 'matang';
+        console.log(`${this.cookie.name}, menit ke ${i} : ${this.cookie.status}`);
+      } else if (i > this.cookie.cooked_time) {
+        this.cookie.status = 'hangus'
+        console.log(`${this.cookie.name}, menit ke ${i} : ${this.cookie.status}`);
       } else if (i < 15) {
-        cookie.status = 'mentah'
-        console.log(`${cookie.name}, menit ke ${i} : ${cookie.status}`);
+        this.cookie.status = 'mentah'
+        console.log(`${this.cookie.name}, menit ke ${i} : ${this.cookie.status}`);
       } else {
-        cookie.status = 'hampir matang'
-        console.log(`${cookie.name}, menit ke ${i} : ${cookie.status}`);
+        this.cookie.status = 'hampir matang'
+        console.log(`${this.cookie.name}, menit ke ${i} : ${this.cookie.status}`);
       }
     }
     console.log(`Done!\n`);
@@ -62,6 +67,5 @@ let chocoChip = new ChocolateChip();
 let peanutButter = new PeanutButter();
 let cheeseCake = new CheeseCake();
 
-Oven.bakes(chocoChip, 20);
-Oven.bakes(peanutButter, 25);
-Oven.bakes(cheeseCake, 40);
+let oven = new Oven(chocoChip, 20);
+oven.bakes();
