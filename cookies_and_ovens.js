@@ -11,28 +11,16 @@
 
 class Cookie {
   constructor(){
-    this.name = '';
+    // this.name = '';
     this.status = "Mentah";
     this.bakingTime = 0; // waktu memasak
     this.bakedTIme = 0; // waktu kue matang
     // this.ingredients = [];
   }
 
-  bake(){
-    // this.status = "selesai dimasak";
-    this.bakingTime += 5;
-
-    if(this.bakingTime == (this.bakedTIme-5)){
-      this.status = "hampir matang";
-    }else if (this.bakingTime == this.bakedTIme) {
-      this.status = "matang";
-    }else if (this.bakingTime >= (this.bakedTIme+5)) {
-      this.status = "hangus";
-    }
-  }
 }
 
-class coklat extends Cookie{
+class Coklat extends Cookie{
   constructor(){
     super();
     this.name = 'cokelat';
@@ -40,7 +28,7 @@ class coklat extends Cookie{
   }
 }
 
-class kacang extends Cookie{
+class Kacang extends Cookie{
   constructor(){
     super();
     this.name = 'kacang';
@@ -48,7 +36,7 @@ class kacang extends Cookie{
   }
 }
 
-class keju extends Cookie{
+class Keju extends Cookie{
   constructor(){
     super();
     this.name = 'keju';
@@ -56,29 +44,62 @@ class keju extends Cookie{
   }
 }
 
+class Oven{
+  constructor(){
+    this.cookies = [];
+    this.timer = 0;
+  }
 
-// let tesCookie = new Cookie();
-let kueCoklat = new coklat();
-let kueKacang = new kacang();
-let kueKeju = new keju();
+  addCookie(cookie){
+    this.cookies.push(cookie);
+  }
 
-//TEST CASE kue Coklat
-for (var i = 0; i < 4; i++) {
-  kueCoklat.bake();
-  console.log(`kue ${kueCoklat.name}, menit ke ${kueCoklat.bakingTime} : ${kueCoklat.status}`);
+  bakingCookie(){
+    for(let i = 0; i < this.cookies.length; i++){
+        let bakingTime = this.cookies[i].bakingTime;
+        let bakedTime = this.cookies[i].bakedTIme;
+        let currentStatus = this.cookies[i].status;
+        let cookieName = this.cookies[i].name;
+        this.cookies[i].bakingTime += 5;
+        let status = this.bakedCheck(bakingTime, bakedTime, currentStatus);
+        console.log(`Kue ${cookieName}, menit ke ${this.timer} : ${status}`);
+    }
+    
+    this.timer += 5;
+  }
+
+  bakedCheck(bakingTime, bakedTime, currentStatus){
+    let status = currentStatus;
+
+    if(bakingTime == bakedTime-5){
+        status = "hampir matang";
+    }else if (bakingTime == bakedTime) {
+        status = "matang";
+    }else if (bakingTime > bakedTime) {
+        status = "hangus";
+    }
+
+    return status;
+  }
 }
-console.log('=======================');
-//TEST CASE kue Kacang
-for (var i = 0; i < 6; i++) {
-  kueKacang.bake();
-  console.log(`kue ${kueKacang.name}, menit ke ${kueKacang.bakingTime} : ${kueKacang.status}`);
-}
-console.log('=======================');
-//TEST CASE kue Keju
+
+// // let tesCookie = new Cookie();
+let kueCoklat = new Coklat();
+let kueKacang = new Kacang();
+let kueKeju = new Keju();
+let oven = new Oven();
+
+oven.addCookie(kueCoklat);
+oven.addCookie(kueKacang);
+oven.addCookie(kueKeju);
+console.log("Kue yang masuk Oven:", oven);
+
+//TEST CASE Oven kue
 for (var i = 0; i < 8; i++) {
-  kueKeju.bake();
-  console.log(`kue ${kueKeju.name}, menit ke ${kueKeju.bakingTime} : ${kueKeju.status}`);
+  console.log(`\nMenit ke ${oven.timer}`);
+  oven.bakingCookie();
 }
+console.log(`\nSetelah ${oven.timer} menit`, oven);
 
 
 
