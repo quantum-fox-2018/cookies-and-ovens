@@ -10,76 +10,91 @@
 // Your code here
 
 class Kue{
-  constructor(cookiesName,cookTime){
-      this.cookiesName = cookiesName;
-      this.cookTime = cookTime;
-      this._time = 0;
+  constructor(cookiesName,bakesTime){
+      this.cookiesName = cookiesName
       this._status = "mentah";
-      this._statusMasak = true;
+      this.bakesTime = 20;
     }
 
-    get time(){
-      return this._time
-    }
     get status(){
       return this._status
     }
-    get waktuMasak(){
-      return this._statusMasak
-    }
 
-    memasak(waktuMemasak){
-
-      this._time = this._time+5;
-
-      if(this._time > this.cookTime){
-        this._status = "Hangus";
-      }
-      else if(this._time  == this.cookTime){
-        this._status = "Matang"
-      }
-      else if(this.time >= this.cookTime -5){
-        this._status = "Hampir matang"
-      }
-      else{
-        this._status = "mentah"
-      }
-      if(this._time >= waktuMemasak){
-        this._statusMasak = false;
-      }
-    }
 }
 
 class CustomeCakes extends Kue {
-  constructor(cookiesName,cookTime){
-    super(cookiesName,cookTime);
+  constructor(cookiesName,bakesTime){
+    super(bakesTime);
     this.cookiesName = cookiesName;
-    this.cookTime = cookTime
+    this.bakesTime = bakesTime;
   }
 }
 
-let kueCoklat = new CustomeCakes('Kue cokelat',20);
+class Oven{
+
+  constructor(cookies,cookTime){
+    this._time = 0
+    this.cookTime = cookTime;
+    this._statusMasak = true;
+    this.bakesTime = cookies.bakesTime;
+    this._status = cookies._status
+  }
+  get waktuMasak(){
+    return this._statusMasak
+  }
+  get time(){
+    return this._time;
+  }
+  get status(){
+    return this._status
+  }
+  bakes(){
+
+    this._time = this._time+5;
+
+    if(this._time > this.bakesTime){
+      this._status = "Hangus";
+    }
+    else if(this._time  == this.bakesTime){
+      this._status = "Matang"
+    }
+    else if(this.time >= this.bakesTime -5){
+      this._status = "Hampir matang"
+    }
+    else{
+      this._status = "mentah"
+    }
+    if(this._time >= this.cookTime){
+      this._statusMasak = false;
+    }
+  }
+}
+
+let kueCoklat = new CustomeCakes('Kue cokelat',20);// (nama kue, waktu matang)
 let kueKacang = new CustomeCakes('Kue kacang',30);
 let kueKeju = new CustomeCakes('Kue keju',35);
+let ovenCoklat = new Oven (kueCoklat,25); // (objek kue, waktu memasak)
+let ovenKacang = new Oven (kueKacang,30);
+let ovenKeju = new Oven (kueKeju,30);
+
 
 console.log(`Proses pembuatan ${kueCoklat.cookiesName}----------------------------------`);
-while(kueCoklat._statusMasak == true){
-  kueCoklat.memasak(25);
-  console.log(`${kueCoklat.cookiesName}, menit ke ${kueCoklat.time} : ${kueCoklat.status}`);
+while(ovenCoklat._statusMasak == true){
+  ovenCoklat.bakes();
+  console.log(`${kueCoklat.cookiesName}, menit ke ${ovenCoklat.time} : ${ovenCoklat.status}`);
 }
-console.log(`${kueCoklat.cookiesName} anda : ${kueCoklat.status}------------------------`)
+console.log(`${kueCoklat.cookiesName} anda : ${ovenCoklat.status}------------------------`)
 
 console.log(`Proses pembuatan ${kueKacang.cookiesName}----------------------------------`);
-while(kueKacang._statusMasak == true){
-  kueKacang.memasak(25);
-  console.log(`${kueKacang.cookiesName}, menit ke ${kueKacang.time} : ${kueKacang.status}`);
+while(ovenKacang._statusMasak == true){
+  ovenKacang.bakes();
+  console.log(`${kueKacang.cookiesName}, menit ke ${ovenKacang.time} : ${ovenKacang.status}`);
 }
-console.log(`${kueKacang.cookiesName} anda : ${kueKacang.status}-------------------------`)
-
+console.log(`${kueKacang.cookiesName} anda : ${ovenKacang.status}------------------------`)
 
 console.log(`Proses pembuatan ${kueKeju.cookiesName}----------------------------------`);
-while(kueKeju._statusMasak == true){
-  kueKeju.memasak(35);
-  console.log(`${kueKeju.cookiesName}, menit ke ${kueKeju.time} : ${kueKeju.status}`);
+while(ovenKeju._statusMasak == true){
+  ovenKeju.bakes();
+  console.log(`${kueKeju.cookiesName}, menit ke ${ovenKeju.time} : ${ovenKeju.status}`);
 }
-console.log(`${kueKeju.cookiesName} anda : ${kueKeju.status}---------------------------`)
+console.log(`${kueKeju.cookiesName} anda : ${ovenKeju.status}------------------------`)
