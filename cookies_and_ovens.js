@@ -38,6 +38,7 @@ class Oven{
     this._statusMasak = true;
     this.bakesTime = cookies.bakesTime;
     this._status = cookies._status
+    this.cookiesName = cookies.cookiesName
   }
   get waktuMasak(){
     return this._statusMasak
@@ -73,28 +74,15 @@ class Oven{
 let kueCoklat = new CustomeCakes('Kue cokelat',20);// (nama kue, waktu matang)
 let kueKacang = new CustomeCakes('Kue kacang',30);
 let kueKeju = new CustomeCakes('Kue keju',35);
-let ovenCoklat = new Oven (kueCoklat,25); // (objek kue, waktu memasak)
-let ovenKacang = new Oven (kueKacang,30);
-let ovenKeju = new Oven (kueKeju,30);
+let cookies = [];
+cookies.push(kueCoklat,kueKacang,kueKeju);
 
-
-console.log(`Proses pembuatan ${kueCoklat.cookiesName}----------------------------------`);
-while(ovenCoklat._statusMasak == true){
-  ovenCoklat.bakes();
-  console.log(`${kueCoklat.cookiesName}, menit ke ${ovenCoklat.time} : ${ovenCoklat.status}`);
+for(let i=0;i<cookies.length;i++){
+  let oven = new Oven (cookies[i],25);
+  console.log(`Proses pembuatan ${kueCoklat.cookiesName}----------------------------------`);
+  while(oven._statusMasak == true){
+    oven.bakes();
+    console.log(`${oven.cookiesName}, menit ke ${oven.time} : ${oven.status}`);
+  }
+  console.log(`${oven.cookiesName} anda : ${oven.status}------------------------`)
 }
-console.log(`${kueCoklat.cookiesName} anda : ${ovenCoklat.status}------------------------`)
-
-console.log(`Proses pembuatan ${kueKacang.cookiesName}----------------------------------`);
-while(ovenKacang._statusMasak == true){
-  ovenKacang.bakes();
-  console.log(`${kueKacang.cookiesName}, menit ke ${ovenKacang.time} : ${ovenKacang.status}`);
-}
-console.log(`${kueKacang.cookiesName} anda : ${ovenKacang.status}------------------------`)
-
-console.log(`Proses pembuatan ${kueKeju.cookiesName}----------------------------------`);
-while(ovenKeju._statusMasak == true){
-  ovenKeju.bakes();
-  console.log(`${kueKeju.cookiesName}, menit ke ${ovenKeju.time} : ${ovenKeju.status}`);
-}
-console.log(`${kueKeju.cookiesName} anda : ${ovenKeju.status}------------------------`)
