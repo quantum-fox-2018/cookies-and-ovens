@@ -64,4 +64,7 @@ class Oven {
 }
 
 var choco = new Cookie('Choco Cookie');
-console.log(choco);
+var cheese = new Cookie('Choco Cookie');
+var peanut = new Cookie('Peanut Cookie');
+
+Oven.bakingCookies(choco)
