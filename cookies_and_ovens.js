@@ -48,11 +48,33 @@ class Oven {
             if (this.cake.cake_name === 'Peanut Cake') {
                 if (i + 5 < 15) {
                     this.arrayOfCake.push(`Kue kacang, menit ke ${i+5} : ${this.cake.cake_status}`);
+                } else if (i + 5 < this.cake.cake_time && i + 5 >= 15) {
+                    this.arrayOfCake.push(`Kue kacang, menit ke ${i+5} : hampir matang`);
+                } else if (i + 5 === this.cake.cake_time) {
+                    this.arrayOfCake.push(`Kue kacang, menit ke ${i+5} : matang`);
+                } else if (i + 5 > this.cake.cake_time) {
+                    this.arrayOfCake.push(`Kue kacang, menit ke ${i+5} : hangus`);
                 }
             } else if (this.cake.cake_name === 'Chocolate Cake') {
-                this.arrayOfCake.push('Kue coklat,');
+                if (i + 5 < 15) {
+                    this.arrayOfCake.push(`Kue coklat, menit ke ${i+5} : ${this.cake.cake_status}`);
+                } else if (i + 5 < this.cake.cake_time && i + 5 >= 15) {
+                    this.arrayOfCake.push(`Kue coklat, menit ke ${i+5} : hampir matang`);
+                } else if (i + 5 === this.cake.cake_time) {
+                    this.arrayOfCake.push(`Kue coklat, menit ke ${i+5} : matang`);
+                } else if (i + 5 > this.cake.cake_time) {
+                    this.arrayOfCake.push(`Kue coklat, menit ke ${i+5} : hangus`);
+                }
             } else if (this.cake.cake_name === 'Cheese Cake') {
-                this.arrayOfCake.push('Kue keju,');
+                if (i + 5 < 15) {
+                    this.arrayOfCake.push(`Kue keju, menit ke ${i+5} : ${this.cake.cake_status}`);
+                } else if (i + 5 < this.cake.cake_time && i + 5 >= 15) {
+                    this.arrayOfCake.push(`Kue keju, menit ke ${i+5} : hampir matang`);
+                } else if (i + 5 === this.cake.cake_time) {
+                    this.arrayOfCake.push(`Kue keju, menit ke ${i+5} : matang`);
+                } else if (i + 5 > this.cake.cake_time) {
+                    this.arrayOfCake.push(`Kue keju, menit ke ${i+5} : hangus`);
+                }
             }
         }
 
@@ -64,6 +86,6 @@ let peanut_cake = new PeanutCake();
 let chocolate_cake = new ChocolateCake();
 let cheese_cake = new CheeseCake();
 
-let oven = new Oven(peanut_cake, 20);
+let oven = new Oven(cheese_cake, 25);
 
 console.log(oven.bake());
